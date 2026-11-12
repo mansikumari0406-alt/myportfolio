@@ -1,291 +1,290 @@
-/* ---------- Variables: 4 colours and 1 font, defined once and reused ---------- */
+/* ==========================================================
+   Mansi Kumari — Portfolio
+   Colours and fonts are defined ONCE here and reused below.
+   ========================================================== */
 :root {
-  color-scheme: only light;
+  /* Colours */
+  --bg: #0b1220;        /* page background */
+  --panel: #111c2e;     /* cards and panels */
+  --text: #edf4ff;      /* main text */
+  --muted: #a8b7cc;     /* secondary text */
+  --accent: #70d6ff;    /* links, buttons, highlights */
+  --line: rgba(174, 202, 235, 0.16);
 
-  --color-bg: #d3e8f7;         /* ice blue: page background */
-  --color-text: #0f2a4a;       /* deep navy: text */
-  --color-primary: #26619c;    /* lapis blue: links, buttons, lines */
-  --color-secondary: #6495ed;  /* cornflower blue: header line, photo frame */
+  /* Font */
+  --font-main: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
 
-  --font-main: "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
-
-  --radius: 8px;
-  --max-width: 880px;
+  /* Layout */
+  --max-width: 1120px;
+  --radius: 16px;
 }
 
 /* ---------- Base ---------- */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 80px; /* keeps headings clear of the sticky nav */
+  scroll-padding-top: 90px; /* keeps headings clear of the sticky nav */
 }
 
 body {
   margin: 0;
+  background: var(--bg);
+  color: var(--text);
   font-family: var(--font-main);
-  font-size: 1.0625rem;
-  line-height: 1.65;
-  color: var(--color-text);
-  background: var(--color-bg);
+  font-size: 1rem;
+  line-height: 1.7;
 }
 
-img {
-  max-width: 100%;
+a { color: var(--accent); }
+a:hover { text-decoration: none; }
+
+h1, h2, h3, h4 { margin: 0 0 0.6rem; line-height: 1.2; }
+h2 { font-size: clamp(1.9rem, 4vw, 2.6rem); letter-spacing: -0.03em; }
+h3 { font-size: 1.15rem; }
+h4 { font-size: 1rem; }
+p  { margin: 0 0 1rem; }
+ul { list-style: none; margin: 0; padding: 0; }
+
+.muted { color: var(--muted); }
+
+.wrap {
+  width: min(var(--max-width), calc(100% - 44px));
+  margin: 0 auto;
 }
 
-h1, h2, h3 {
-  font-weight: 700;
-  line-height: 1.2;
-  margin: 0 0 0.75rem;
-}
-
-h1 { font-size: clamp(2.1rem, 8vw, 3.75rem); letter-spacing: -0.02em; }
-h2 { font-size: 1.75rem; }
-h3 { font-size: 1.2rem; }
-
-p { margin: 0 0 1rem; max-width: 65ch; }
-
-a {
-  color: var(--color-primary);
-  text-underline-offset: 3px;
-}
-
-a:hover { text-decoration-thickness: 2px; }
-
-a:focus-visible {
-  outline: 3px solid var(--color-primary);
-  outline-offset: 3px;
-}
-
-/* ---------- Header and nav (flexbox) ---------- */
+/* ---------- Header + navbar (flexbox) ---------- */
 .site-header {
   position: sticky;
   top: 0;
   z-index: 10;
-  background: color-mix(in srgb, var(--color-bg) 35%, white);
-  border-bottom: 4px solid var(--color-secondary);
+  background: rgba(11, 18, 32, 0.9);
+  border-bottom: 1px solid var(--line);
 }
 
 .nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 1rem 1.5rem;
+  gap: 24px;
+  min-height: 72px;
 }
 
-.nav__brand {
-  font-weight: 700;
-  font-size: 1.15rem;
-  color: var(--color-text);
+.brand {
+  color: var(--text);
+  font-weight: 800;
+  letter-spacing: 0.03em;
   text-decoration: none;
 }
+.brand span { color: var(--accent); }
 
-.nav__links {
+.nav-links {
   display: flex;
-  gap: 1.5rem;
-  list-style: none;
-  margin: 0;
-  padding: 0;
+  gap: 24px;
 }
-
-.nav__links a {
-  color: color-mix(in srgb, var(--color-text) 75%, var(--color-bg));
+.nav-links a {
+  color: var(--muted);
   text-decoration: none;
-}
-
-.nav__links a:hover {
-  color: var(--color-text);
-  text-decoration: underline;
-}
-
-/* ---------- Layout ---------- */
-main {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 1.5rem;
-}
-
-.hero {
-  padding: 6rem 0 4rem;
-}
-
-.hero__lead {
-  font-size: 1.25rem;
-  color: color-mix(in srgb, var(--color-text) 75%, var(--color-bg));
-  margin-bottom: 1.75rem;
-}
-
-.section {
-  padding: 3.5rem 0;
-  border-top: 2px solid var(--color-primary);
-}
-
-/* ---------- Button ---------- */
-.button {
-  display: inline-block;
-  padding: 0.7rem 1.4rem;
-  background: var(--color-primary);
-  color: var(--color-bg);
-  border-radius: var(--radius);
-  text-decoration: none;
-  font-weight: 600;
-}
-
-.button:hover {
-  background: var(--color-text);
-  text-decoration: underline;
-}
-
-/* ---------- About ---------- */
-.about {
-  display: flex;
-  align-items: flex-start;
-  gap: 2.5rem;
-  margin-bottom: 2rem;
-}
-
-.about__photo {
-  width: 180px;
-  height: 240px;
-  object-fit: cover;
-  object-position: top;
-  border: 3px solid var(--color-secondary);
-  border-radius: var(--radius);
-  flex-shrink: 0;
-}
-
-.facts {
-  margin: 0;
-}
-
-.facts div {
-  display: flex;
-  gap: 1rem;
-  padding: 0.5rem 0;
-  border-top: 1px solid var(--color-primary);
-}
-
-.facts dt {
-  flex: 0 0 7rem;
-  color: color-mix(in srgb, var(--color-text) 75%, var(--color-bg));
-}
-
-.facts dd {
-  margin: 0;
-}
-
-.skills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.6rem;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.skills li {
-  padding: 0.3rem 0.9rem;
-  background: color-mix(in srgb, var(--color-bg) 35%, white);
-  color: var(--color-primary);
-  border: 1px solid color-mix(in srgb, var(--color-primary) 35%, var(--color-bg));
-  border-radius: 999px;
   font-size: 0.95rem;
 }
+.nav-links a:hover { color: var(--accent); }
 
-/* ---------- Project cards (flexbox) ---------- */
-.cards {
+/* ---------- Hero ---------- */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 48px;
+  padding: 80px 0;
+}
+.hero-text { flex: 1 1 0; }
+
+.eyebrow,
+.kicker {
+  margin: 0;
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 16px 0 18px;
+  font-size: clamp(2.6rem, 7vw, 5rem);
+  letter-spacing: -0.05em;
+}
+h1 span { color: var(--accent); }
+
+.lead {
+  max-width: 650px;
+  color: var(--muted);
+  font-size: 1.15rem;
+}
+
+.actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.5rem;
+  gap: 14px;
+  margin-top: 30px;
 }
 
-.card {
-  flex: 1 1 240px;
-  padding: 1.5rem;
-  background: color-mix(in srgb, var(--color-bg) 35%, white);
-  border: 1px solid color-mix(in srgb, var(--color-primary) 35%, var(--color-bg));
-  border-top: 4px solid var(--color-primary);
-  border-radius: var(--radius);
-  box-shadow: 0 2px 8px color-mix(in srgb, var(--color-primary) 18%, transparent);
+.btn {
+  display: inline-block;
+  padding: 11px 20px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  color: var(--text);
+  font-weight: 700;
+  text-decoration: none;
   transition: transform 0.2s ease;
 }
-
-.card:hover {
-  transform: translateY(-4px); /* stretch goal */
+.btn:hover { transform: translateY(-2px); }
+.btn.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg);
 }
 
-.status {
-  display: inline-block;
-  margin-bottom: 0.75rem;
-  padding: 0.1rem 0.7rem;
-  font-size: 0.85rem;
-  color: color-mix(in srgb, var(--color-text) 75%, var(--color-bg));
-  background: var(--color-bg);
-  border: 1px solid color-mix(in srgb, var(--color-primary) 35%, var(--color-bg));
+.portrait-frame {
+  padding: 12px;
+  border: 1px solid rgba(112, 214, 255, 0.4);
+  border-radius: 28px;
+  background: rgba(112, 214, 255, 0.08);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.3);
+}
+.portrait {
+  display: block;
+  width: 290px;
+  max-width: 100%;
+  height: 350px;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 19px;
+}
+
+/* ---------- Sections ---------- */
+.section {
+  padding: 76px 0;
+  border-top: 1px solid var(--line);
+}
+.section-head { margin-bottom: 30px; }
+.sub-head { margin: 40px 0 16px; }
+
+/* A reusable flex row: used for About panels and project cards */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.row > * { flex: 1 1 280px; }
+
+/* ---------- Panels (box model: padding + border + radius) ---------- */
+.panel {
+  padding: 26px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+/* About facts */
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin: 0;
+}
+.fact { flex: 1 1 40%; }
+.fact dt { color: var(--muted); font-size: 0.9rem; }
+.fact dd { margin: 0; font-weight: 700; }
+
+/* Skill chips */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+.chips li {
+  padding: 6px 12px;
+  border: 1px solid rgba(112, 214, 255, 0.25);
   border-radius: 999px;
+  background: rgba(112, 214, 255, 0.07);
+  color: var(--text);
+  font-size: 0.9rem;
 }
 
-.status--done {
-  color: var(--color-bg);
-  background: var(--color-primary);
-  border-color: var(--color-primary);
+/* ---------- Project cards ---------- */
+.card {
+  padding: 24px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card:hover {                      /* stretch goal: small lift */
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+}
+.card p { color: var(--muted); font-size: 0.95rem; }
+
+.tag {
+  display: inline-block;
+  margin-bottom: 14px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(112, 214, 255, 0.1);
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 700;
 }
 
 /* ---------- Contact ---------- */
-.contact-list {
+.contact-box {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.5rem;
-  list-style: none;
-  margin: 0;
-  padding: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 22px;
 }
+.contact-box p { margin: 0; }
+
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+.contact-links a { text-decoration: none; }
+.contact-links a:hover { text-decoration: underline; }
 
 /* ---------- Footer ---------- */
 .site-footer {
-  padding: 2rem 1.5rem;
-  text-align: center;
-  color: color-mix(in srgb, var(--color-text) 75%, var(--color-bg));
-  border-top: 2px solid var(--color-primary);
-}
-
-.site-footer p {
-  margin: 0 auto;
+  padding: 28px 0 42px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.9rem;
 }
 
 /* ---------- Small screens ---------- */
-@media (max-width: 640px) {
-  .about {
-    flex-direction: column;
-    gap: 1.5rem;
+@media (max-width: 800px) {
+  .hero {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    padding: 56px 0;
   }
-
-  .hero { padding-top: 3.5rem; }
-
-  .nav { padding: 0.5rem 1rem; flex-wrap: wrap; row-gap: 0; }
-  .nav__brand { white-space: nowrap; font-size: 1.05rem; }
-  .nav__links { gap: 1rem; font-size: 0.95rem; }
-  .nav__links a { display: inline-block; padding: 0.5rem 0; } /* bigger tap area */
-
-  .facts div { flex-direction: column; gap: 0; }
-  .facts dt { flex: none; } /* stops the 7rem label width becoming a tall gap */
+  .portrait { width: 210px; height: 245px; }
 }
 
-/* Very small phones (about 360px wide or less) */
-@media (max-width: 380px) {
-  html { scroll-padding-top: 110px; } /* the nav may wrap to two lines here */
-  .nav__links { gap: 0.75rem; font-size: 0.9rem; }
-  .section { padding: 2.5rem 0; }
+@media (max-width: 560px) {
+  .wrap { width: calc(100% - 30px); }
+  .nav { flex-direction: column; align-items: flex-start; gap: 6px; padding: 12px 0; }
+  .nav-links { gap: 16px; }
+  .section { padding: 56px 0; }
+  .fact { flex-basis: 100%; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .card { transition: none; }
+  .btn, .card { transition: none; }
+  .btn:hover, .card:hover { transform: none; }
 }
