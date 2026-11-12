@@ -1,0 +1,291 @@
+/* ---------- Variables: 4 colours and 1 font, defined once and reused ---------- */
+:root {
+  color-scheme: only light;
+
+  --color-bg: #d3e8f7;         /* ice blue: page background */
+  --color-text: #0f2a4a;       /* deep navy: text */
+  --color-primary: #26619c;    /* lapis blue: links, buttons, lines */
+  --color-secondary: #6495ed;  /* cornflower blue: header line, photo frame */
+
+  --font-main: "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+
+  --radius: 8px;
+  --max-width: 880px;
+}
+
+/* ---------- Base ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px; /* keeps headings clear of the sticky nav */
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-main);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: var(--color-text);
+  background: var(--color-bg);
+}
+
+img {
+  max-width: 100%;
+}
+
+h1, h2, h3 {
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0 0 0.75rem;
+}
+
+h1 { font-size: clamp(2.1rem, 8vw, 3.75rem); letter-spacing: -0.02em; }
+h2 { font-size: 1.75rem; }
+h3 { font-size: 1.2rem; }
+
+p { margin: 0 0 1rem; max-width: 65ch; }
+
+a {
+  color: var(--color-primary);
+  text-underline-offset: 3px;
+}
+
+a:hover { text-decoration-thickness: 2px; }
+
+a:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+/* ---------- Header and nav (flexbox) ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: color-mix(in srgb, var(--color-bg) 35%, white);
+  border-bottom: 4px solid var(--color-secondary);
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+}
+
+.nav__brand {
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.nav__links {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav__links a {
+  color: color-mix(in srgb, var(--color-text) 75%, var(--color-bg));
+  text-decoration: none;
+}
+
+.nav__links a:hover {
+  color: var(--color-text);
+  text-decoration: underline;
+}
+
+/* ---------- Layout ---------- */
+main {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.hero {
+  padding: 6rem 0 4rem;
+}
+
+.hero__lead {
+  font-size: 1.25rem;
+  color: color-mix(in srgb, var(--color-text) 75%, var(--color-bg));
+  margin-bottom: 1.75rem;
+}
+
+.section {
+  padding: 3.5rem 0;
+  border-top: 2px solid var(--color-primary);
+}
+
+/* ---------- Button ---------- */
+.button {
+  display: inline-block;
+  padding: 0.7rem 1.4rem;
+  background: var(--color-primary);
+  color: var(--color-bg);
+  border-radius: var(--radius);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.button:hover {
+  background: var(--color-text);
+  text-decoration: underline;
+}
+
+/* ---------- About ---------- */
+.about {
+  display: flex;
+  align-items: flex-start;
+  gap: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.about__photo {
+  width: 180px;
+  height: 240px;
+  object-fit: cover;
+  object-position: top;
+  border: 3px solid var(--color-secondary);
+  border-radius: var(--radius);
+  flex-shrink: 0;
+}
+
+.facts {
+  margin: 0;
+}
+
+.facts div {
+  display: flex;
+  gap: 1rem;
+  padding: 0.5rem 0;
+  border-top: 1px solid var(--color-primary);
+}
+
+.facts dt {
+  flex: 0 0 7rem;
+  color: color-mix(in srgb, var(--color-text) 75%, var(--color-bg));
+}
+
+.facts dd {
+  margin: 0;
+}
+
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.skills li {
+  padding: 0.3rem 0.9rem;
+  background: color-mix(in srgb, var(--color-bg) 35%, white);
+  color: var(--color-primary);
+  border: 1px solid color-mix(in srgb, var(--color-primary) 35%, var(--color-bg));
+  border-radius: 999px;
+  font-size: 0.95rem;
+}
+
+/* ---------- Project cards (flexbox) ---------- */
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.card {
+  flex: 1 1 240px;
+  padding: 1.5rem;
+  background: color-mix(in srgb, var(--color-bg) 35%, white);
+  border: 1px solid color-mix(in srgb, var(--color-primary) 35%, var(--color-bg));
+  border-top: 4px solid var(--color-primary);
+  border-radius: var(--radius);
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--color-primary) 18%, transparent);
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px); /* stretch goal */
+}
+
+.status {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  padding: 0.1rem 0.7rem;
+  font-size: 0.85rem;
+  color: color-mix(in srgb, var(--color-text) 75%, var(--color-bg));
+  background: var(--color-bg);
+  border: 1px solid color-mix(in srgb, var(--color-primary) 35%, var(--color-bg));
+  border-radius: 999px;
+}
+
+.status--done {
+  color: var(--color-bg);
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+/* ---------- Contact ---------- */
+.contact-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* ---------- Footer ---------- */
+.site-footer {
+  padding: 2rem 1.5rem;
+  text-align: center;
+  color: color-mix(in srgb, var(--color-text) 75%, var(--color-bg));
+  border-top: 2px solid var(--color-primary);
+}
+
+.site-footer p {
+  margin: 0 auto;
+}
+
+/* ---------- Small screens ---------- */
+@media (max-width: 640px) {
+  .about {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .hero { padding-top: 3.5rem; }
+
+  .nav { padding: 0.5rem 1rem; flex-wrap: wrap; row-gap: 0; }
+  .nav__brand { white-space: nowrap; font-size: 1.05rem; }
+  .nav__links { gap: 1rem; font-size: 0.95rem; }
+  .nav__links a { display: inline-block; padding: 0.5rem 0; } /* bigger tap area */
+
+  .facts div { flex-direction: column; gap: 0; }
+  .facts dt { flex: none; } /* stops the 7rem label width becoming a tall gap */
+}
+
+/* Very small phones (about 360px wide or less) */
+@media (max-width: 380px) {
+  html { scroll-padding-top: 110px; } /* the nav may wrap to two lines here */
+  .nav__links { gap: 0.75rem; font-size: 0.9rem; }
+  .section { padding: 2.5rem 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .card { transition: none; }
+}
