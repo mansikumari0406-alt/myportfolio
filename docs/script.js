@@ -1,3 +1,4 @@
+console.log("script.js is running");
 // ---------- Project data: to add a project, add one more object ----------
 const projects = [
   {
