@@ -288,3 +288,77 @@ h1 span { color: var(--text); }
   .btn, .card { transition: none; }
   .btn:hover, .card:hover { transform: none; }
 }
+/* ========== Week 2: mobile menu, filters, responsive cards ========== */
+body { overflow-wrap: break-word; }
+
+/* Hamburger button: visible on phones by default (mobile first) */
+.menu-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: 1.3rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.menu-toggle:hover { border-color: var(--accent); }
+.menu-toggle:focus-visible,
+.filter-btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+
+/* Phone navbar: brand and button on one row, links drop below when open */
+.nav {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: center;
+  gap: 0 24px;
+  padding: 0;
+}
+.nav-links {
+  display: none;
+  flex-direction: column;
+  flex-basis: 100%;
+  gap: 2px;
+  padding: 0 0 14px;
+}
+.nav-links.open { display: flex; }
+.nav-links a { display: block; padding: 10px 0; }
+
+/* Larger screens: normal row of links, no hamburger */
+@media (min-width: 801px) {
+  .menu-toggle { display: none; }
+  .nav-links { display: flex; flex-direction: row; flex-basis: auto; gap: 24px; padding: 0; }
+  .nav-links a { display: inline; padding: 0; }
+}
+
+/* Project cards: one column on phones, a row on larger screens */
+.cards { flex-direction: column; }
+.cards > * { flex: 0 0 auto; }
+@media (min-width: 700px) {
+  .cards { flex-direction: row; }
+  .cards > * { flex: 1 1 280px; }
+}
+.cards .chips { margin-bottom: 16px; }
+.cards .chips li { padding: 3px 10px; font-size: 0.8rem; }
+.empty-message { color: var(--muted); }
+
+/* Filter buttons */
+.filters { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 22px; }
+.filter-btn {
+  padding: 8px 16px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.filter-btn:hover { color: var(--text); border-color: var(--accent); }
+.filter-btn.active { background: var(--accent); border-color: var(--accent); color: var(--bg); }

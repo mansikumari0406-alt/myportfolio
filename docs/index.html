@@ -10,9 +10,10 @@
 <body>
 
   <header class="site-header">
-    <nav class="nav wrap" aria-label="Main navigation">
+        <nav class="nav wrap" aria-label="Main navigation">
       <a class="brand" href="#home">MANSI<span>.</span></a>
-      <ul class="nav-links">
+      <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">☰</button>
+      <ul class="nav-links" id="nav-links">
         <li><a href="#about">About</a></li>
         <li><a href="#skills">Tech Stack</a></li>
         <li><a href="#projects">Projects</a></li>
@@ -92,36 +93,23 @@
       </div>
     </section>
 
-    <!-- Projects -->
+        <!-- Projects -->
     <section class="section" id="projects">
       <header class="section-head">
         <p class="kicker">Things I've worked on</p>
         <h2>Featured Projects</h2>
       </header>
 
-      <div class="row">
-        <article class="card">
-          <span class="tag">Completed</span>
-          <h3>Personal Portfolio Website</h3>
-          <p>A responsive personal website built with semantic HTML and CSS to introduce my background, skills, projects, and contact information.</p>
-          <a href="https://github.com/mansikumari0406-alt" target="_blank" rel="noopener">GitHub profile ↗</a>
-        </article>
-
-        <article class="card">
-          <span class="tag">Planned</span>
-          <h3>Student Marks Calculator</h3>
-          <p>A Python program planned to take subject marks and calculate total marks, percentage, and grade.</p>
-          <a href="#projects">Coming soon</a>
-        </article>
-
-        <article class="card">
-          <span class="tag">Planned</span>
-          <h3>To-Do List App</h3>
-          <p>A JavaScript web app planned to let users add tasks, mark them complete, and remove them in the browser.</p>
-          <a href="#projects">Coming soon</a>
-        </article>
+      <div class="filters" id="filters">
+        <button class="filter-btn active" type="button" data-filter="All" aria-pressed="true">All</button>
+        <button class="filter-btn" type="button" data-filter="HTML" aria-pressed="false">HTML</button>
+        <button class="filter-btn" type="button" data-filter="JavaScript" aria-pressed="false">JavaScript</button>
+        <button class="filter-btn" type="button" data-filter="Python" aria-pressed="false">Python</button>
       </div>
+
+      <div class="row cards" id="projects-grid"></div>
     </section>
+
 
     <!-- Achievements & Certifications -->
     <section class="section" id="achievements">
@@ -185,6 +173,6 @@
   <footer class="site-footer">
     <div class="wrap">© 2026 Mansi Kumari · Aspiring Software Development Engineer</div>
   </footer>
-
+  <script src="script.js"></script>
 </body>
 </html>
