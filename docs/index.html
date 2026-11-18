@@ -8,19 +8,23 @@
   <link rel="stylesheet" href="style.css">
   <link rel="icon" href="data:,">
 </head>
-<body>
+<body class="dark"></body>
 
   <header class="site-header">
         <nav class="nav wrap" aria-label="Main navigation">
       <a class="brand" href="#home">MANSI<span>.</span></a>
-      <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">☰</button>
       <ul class="nav-links" id="nav-links">
         <li><a href="#about">About</a></li>
         <li><a href="#skills">Tech Stack</a></li>
         <li><a href="#projects">Projects</a></li>
+        <li><a href="#repos">GitHub</a></li>
         <li><a href="#achievements">Achievements</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="theme-toggle" type="button">Light mode</button>
+        <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">☰</button>
+      </div>
     </nav>
   </header>
 
@@ -111,7 +115,16 @@
       <div class="row cards" id="projects-grid"></div>
     </section>
 
+    <!-- GitHub repos (loaded by JavaScript) -->
+    <section class="section" id="repos">
+      <header class="section-head">
+        <p class="kicker">Live from GitHub</p>
+        <h2>My GitHub Repos</h2>
+      </header>
 
+      <p class="status-message" id="repos-status" role="status">Loading...</p>
+      <div class="row cards" id="repos-grid"></div>
+    </section>
     <!-- Achievements & Certifications -->
     <section class="section" id="achievements">
       <header class="section-head">

@@ -362,3 +362,90 @@ body { overflow-wrap: break-word; }
 }
 .filter-btn:hover { color: var(--text); border-color: var(--accent); }
 .filter-btn.active { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+
+/* ========== Week 3: light / dark themes, GitHub repos ========== */
+
+/* Light theme is the default; body.dark overrides the colour variables */
+body {
+  --bg: #f5f8fc;
+  --panel: #ffffff;
+  --text: #0f1b2d;
+  --muted: #44546a;
+  --accent: #0b6fa4;
+  --line: rgba(15, 27, 45, 0.16);
+  color-scheme: light;
+}
+body.dark {
+  --bg: #0b1220;
+  --panel: #111c2e;
+  --text: #edf4ff;
+  --muted: #a8b7cc;
+  --accent: #70d6ff;
+  --line: rgba(174, 202, 235, 0.16);
+  color-scheme: dark;
+}
+
+.site-header { background: var(--bg); }
+
+/* Softer details in the light theme */
+body:not(.dark) .chips li { border-color: rgba(11, 111, 164, 0.35); background: rgba(11, 111, 164, 0.07); }
+body:not(.dark) .tag { background: rgba(11, 111, 164, 0.1); }
+body:not(.dark) .portrait-frame { background: rgba(11, 111, 164, 0.08); border-color: rgba(11, 111, 164, 0.4); box-shadow: 0 24px 70px rgba(15, 27, 45, 0.15); }
+body:not(.dark) .card { box-shadow: 0 4px 14px rgba(15, 27, 45, 0.1); }
+body:not(.dark) .card:hover { box-shadow: 0 10px 24px rgba(15, 27, 45, 0.16); }
+
+/* Navbar order: logo, then buttons, then links drop below on phones */
+.brand { order: 1; }
+.nav-actions { order: 2; display: flex; align-items: center; gap: 10px; margin-left: auto; }
+.nav-links { order: 3; }
+@media (min-width: 801px) {
+  .nav-links { order: 2; }
+  .nav-actions { order: 3; margin-left: 0; }
+}
+
+.theme-toggle {
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.theme-toggle:hover { border-color: var(--accent); }
+.theme-toggle:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+
+/* GitHub repos section */
+#repos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+.status-message { color: var(--muted); }
+.status-message.error {
+  padding: 14px 18px;
+  border: 1px solid #e5484d;
+  border-radius: 12px;
+  background: rgba(229, 72, 77, 0.1);
+  color: var(--text);
+}
+.repo-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  margin: 0 0 14px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.repo-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 22px; }
+.repo-controls label { color: var(--muted); font-size: 0.9rem; }
+.repo-controls select {
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--panel);
+  color: var(--text);
+  font: inherit;
+}
