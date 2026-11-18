@@ -112,7 +112,10 @@ function escapeHTML(text) {
 const REPOS_URL = "https://api.github.com/users/mansikumari0406-alt/repos?per_page=100";
 const reposGrid = document.querySelector("#repos-grid");
 const reposStatus = document.querySelector("#repos-status");
+const languageFilter = document.querySelector("#language-filter");
+const repoControls = document.querySelector("#repo-controls");
 
+let allRepos = [];
 function createRepoCard(repo) {
   const kind = repo.fork ? "Fork" : "Original";
   const description = repo.description || "No description yet";
@@ -130,29 +133,70 @@ function createRepoCard(repo) {
     </article>`;
 }
 
+function displayRepos(repos) {
+  reposGrid.innerHTML = repos.length
+    ? repos.map(createRepoCard).join("")
+    : '<p class="status-message">No repositories found for this language.</p>';
+}
+
+function setupLanguageFilter(repos) {
+  const languages = [
+    ...new Set(repos.map(repo => repo.language).filter(Boolean))
+  ].sort();
+
+  languages.forEach(language => {
+    const option = document.createElement("option");
+    option.value = language;
+    option.textContent = language;
+    languageFilter.appendChild(option);
+  });
+
+  repoControls.hidden = false;
+
+  languageFilter.addEventListener("change", () => {
+    const selectedLanguage = languageFilter.value;
+
+    const filteredRepos = selectedLanguage === "All"
+      ? allRepos
+      : allRepos.filter(repo => repo.language === selectedLanguage);
+
+    displayRepos(filteredRepos);
+  });
+}
+
 async function loadRepos() {
   try {
     const response = await fetch(REPOS_URL);
+
     if (!response.ok) {
       throw new Error("GitHub responded with status " + response.status);
     }
-    const repos = await response.json();
+
+    allRepos = await response.json();
 
     // Own repos first, then most stars, then most recently updated
-    repos.sort((a, b) =>
+    allRepos.sort((a, b) =>
       (a.fork - b.fork) ||
       (b.stargazers_count - a.stargazers_count) ||
       (new Date(b.updated_at) - new Date(a.updated_at))
     );
 
-    reposStatus.hidden = true;   // remove the "Loading..." message
-    reposGrid.innerHTML = repos.length
-      ? repos.map(createRepoCard).join("")
-      : '<p class="status-message">No public repositories yet.</p>';
+    reposStatus.hidden = true;
+
+    if (allRepos.length > 0) {
+      setupLanguageFilter(allRepos);
+      displayRepos(allRepos);
+    } else {
+      reposGrid.innerHTML =
+        '<p class="status-message">No public repositories yet.</p>';
+    }
+
   } catch (error) {
     reposStatus.hidden = false;
     reposStatus.classList.add("error");
-    reposStatus.textContent = "Sorry, I couldn't load my GitHub repos right now. Please try again later or visit my GitHub profile.";
+    reposStatus.textContent =
+      "Sorry, I couldn't load my GitHub repos right now. Please try again later or visit my GitHub profile.";
+
     console.error("Could not load repos:", error);
   }
 }
@@ -162,10 +206,16 @@ loadRepos();
 // ---------- Light / dark theme (remembered with localStorage) ----------
 const themeToggle = document.querySelector("#theme-toggle");
 
+
 function applyTheme(theme) {
   const isDark = theme === "dark";
   document.body.classList.toggle("dark", isDark);
   themeToggle.textContent = isDark ? "Light mode" : "Dark mode";
+
+  themeToggle.setAttribute(
+    "aria-label",
+    isDark ? "Switch to light mode" : "Switch to dark mode"
+  );
 }
 
 function getSavedTheme() {
