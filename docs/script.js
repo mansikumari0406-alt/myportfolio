@@ -1,6 +1,15 @@
 console.log("script.js is running");
 // ---------- Project data: to add a project, add one more object ----------
+
 const projects = [
+  {
+    title: "PeoplePilot – User Management System",
+    description: "A full-stack user management application featuring secure registration and login, role-based access, admin and user dashboards, and CRUD operations with MongoDB integration.",
+    tags: ["JavaScript", "React", "Node.js", "Express.js", "MongoDB"],
+    link: "https://github.com/mansikumari0406-alt/PeoplePilot-User-Management-System",
+    linkText: "View on GitHub ↗",
+    status: "Completed"
+  },
   {
     title: "Personal Portfolio Website",
     description: "A responsive personal website built with semantic HTML and CSS to introduce my background, skills, projects, and contact information.",
