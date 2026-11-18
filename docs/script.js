@@ -97,3 +97,93 @@ menuToggle.addEventListener("click", () => {
 navLinks.querySelectorAll("a").forEach(link => {
   link.addEventListener("click", () => setMenu(false));
 });
+
+// ========== Week 3: GitHub repos + theme toggle ==========
+
+// Turn text into safe text so descriptions from other people can't inject HTML
+function escapeHTML(text) {
+  return String(text)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+const REPOS_URL = "https://api.github.com/users/mansikumari0406-alt/repos?per_page=100";
+const reposGrid = document.querySelector("#repos-grid");
+const reposStatus = document.querySelector("#repos-status");
+
+function createRepoCard(repo) {
+  const kind = repo.fork ? "Fork" : "Original";
+  const description = repo.description || "No description yet";
+  const language = repo.language || "Not specified";
+  return `
+    <article class="card">
+      <span class="tag">${kind}</span>
+      <h3>${escapeHTML(repo.name)}</h3>
+      <p>${escapeHTML(description)}</p>
+      <p class="repo-meta">
+        <span>● ${escapeHTML(language)}</span>
+        <span>★ ${repo.stargazers_count}</span>
+      </p>
+      <a href="${escapeHTML(repo.html_url)}" target="_blank" rel="noopener">View repo ↗</a>
+    </article>`;
+}
+
+async function loadRepos() {
+  try {
+    const response = await fetch(REPOS_URL);
+    if (!response.ok) {
+      throw new Error("GitHub responded with status " + response.status);
+    }
+    const repos = await response.json();
+
+    // Own repos first, then most stars, then most recently updated
+    repos.sort((a, b) =>
+      (a.fork - b.fork) ||
+      (b.stargazers_count - a.stargazers_count) ||
+      (new Date(b.updated_at) - new Date(a.updated_at))
+    );
+
+    reposStatus.hidden = true;   // remove the "Loading..." message
+    reposGrid.innerHTML = repos.length
+      ? repos.map(createRepoCard).join("")
+      : '<p class="status-message">No public repositories yet.</p>';
+  } catch (error) {
+    reposStatus.hidden = false;
+    reposStatus.classList.add("error");
+    reposStatus.textContent = "Sorry, I couldn't load my GitHub repos right now. Please try again later or visit my GitHub profile.";
+    console.error("Could not load repos:", error);
+  }
+}
+
+loadRepos();
+
+// ---------- Light / dark theme (remembered with localStorage) ----------
+const themeToggle = document.querySelector("#theme-toggle");
+
+function applyTheme(theme) {
+  const isDark = theme === "dark";
+  document.body.classList.toggle("dark", isDark);
+  themeToggle.textContent = isDark ? "Light mode" : "Dark mode";
+}
+
+function getSavedTheme() {
+  try {
+    return localStorage.getItem("theme") || "dark";
+  } catch (error) {
+    return "dark";
+  }
+}
+
+themeToggle.addEventListener("click", () => {
+  const next = document.body.classList.contains("dark") ? "light" : "dark";
+  applyTheme(next);
+  try {
+    localStorage.setItem("theme", next);
+  } catch (error) {
+    // storage blocked: the theme still changes, it just won't be remembered
+  }
+});
+
+applyTheme(getSavedTheme());
