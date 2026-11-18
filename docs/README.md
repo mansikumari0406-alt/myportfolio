@@ -6,15 +6,16 @@ A responsive personal portfolio built with plain HTML, CSS and JavaScript.
 
 ## Features
 
-- Responsive layout that works on phones and laptops, using a mobile-first approach with media queries
-- Mobile hamburger menu that toggles an `open` class with JavaScript, and closes when a link is tapped
-- Project cards generated from a JavaScript array, so adding a project only means editing data
-- Filter buttons (All, HTML, JavaScript, Python) that show only the matching projects, with the active button highlighted
-- Semantic HTML (`header`, `nav`, `main`, `section`, `footer`), CSS variables, Flexbox and smooth scrolling
+- Responsive layout (mobile-first) with a hamburger menu on phones
+- Project cards generated from a JavaScript array, with filter buttons
+- **GitHub repos section:** fetches my public repositories from the GitHub API with `fetch` and `async/await`, shows a Loading message, and shows a friendly error message if the request fails
+- Each repo card shows the name, description, language, star count and a link, with a Fork or Original tag
+- **Light and dark mode:** a toggle switches a `dark` class on `body` to swap CSS variables, and the choice is saved in `localStorage`
+- Semantic HTML, CSS variables, Flexbox and Grid
 
 ## Built with
 
-HTML, CSS, JavaScript (no frameworks), Git, GitHub and GitHub Pages
+HTML, CSS, JavaScript (no frameworks), GitHub API, Git, GitHub and GitHub Pages
 
 ## Project structure
 
@@ -33,29 +34,12 @@ myportfolio/
 1. Clone or download this repository
 2. Open `index.html` in your browser
 
-## Add a new project
-
-Open `script.js` and add one more object to the `projects` array:
-
-```js
-{
-  title: "My New Project",
-  description: "One line about what it does.",
-  tags: ["JavaScript"],
-  link: "https://github.com/mansikumari0406-alt/my-new-project",
-  linkText: "View on GitHub ↗",
-  status: "Completed"
-}
-```
-
-The card and its filter appear automatically, with no HTML changes.
-
 ## What I learned
 
-- Selecting elements and listening for events with `querySelector` and `addEventListener`
-- Storing data in an array of objects and rendering it with `map()` and template literals
-- Filtering data with `filter()` and toggling CSS classes from JavaScript
-- Mobile-first responsive design and testing at 375px width
+- Fetching data from a public API with `fetch` and `async/await`
+- Handling loading and error states with `try/catch` and `response.ok`
+- Saving and reading settings with `localStorage`
+- Theming a site by swapping CSS variables with a class on `body`
 
 ## Contact
 
